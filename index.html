@@ -3,166 +3,215 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Adınız Soyadınız | Web Tasarım ve Danışmanlık</title>
-  <meta name="description" content="Kısa ve net bir site açıklaması yazın.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <title>Termux ve OSINT Araçları Rehberi</title>
+  <meta name="description" content="OSINT nedir, ne için kullanılır ve Termux'ta kullanılan 55 araç.">
   <style>
-    :root {
-      --ink: #1b2a41;
-      --muted: #56657a;
-      --line: #dfe5ec;
-      --bg: #fafbfc;
-      --panel: #eef2f6;
-      --accent: #0f6e8c;
-      --accent-dark: #0b566f;
-    }
+    :root { --bg:#141a26; --panel:#1d2536; --line:#2c3850; --text:#e6ebf5; --muted:#9aa7bf; --accent:#5cc8ff; }
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-      color: var(--ink);
-      background: var(--bg);
-      line-height: 1.65;
-    }
-    a { color: inherit; }
-    :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
-    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
-
-    header { border-bottom: 1px solid var(--line); background: #fff; position: sticky; top: 0; z-index: 10; }
-    .bar { display: flex; align-items: center; justify-content: space-between; height: 68px; }
-    .brand { font-weight: 800; text-decoration: none; letter-spacing: -0.01em; }
-    nav { display: flex; gap: 24px; }
-    nav a { text-decoration: none; color: var(--muted); font-weight: 500; font-size: 0.95rem; }
-    nav a:hover { color: var(--ink); }
-
-    .hero { padding: 96px 0 88px; }
-    .hero h1 {
-      font-size: clamp(2.2rem, 6vw, 4rem);
-      line-height: 1.08;
-      letter-spacing: -0.03em;
-      font-weight: 800;
-      margin: 0 0 24px;
-      max-width: 16ch;
-    }
-    .hero p { font-size: 1.15rem; color: var(--muted); max-width: 52ch; margin: 0 0 36px; }
-    .btns { display: flex; flex-wrap: wrap; gap: 12px; }
-    .btn {
-      display: inline-block; padding: 14px 26px; border-radius: 8px;
-      font-weight: 700; text-decoration: none; border: 2px solid var(--accent);
-    }
-    .btn.primary { background: var(--accent); color: #fff; }
-    .btn.primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
-    .btn.ghost { color: var(--accent); }
-    .btn.ghost:hover { background: var(--panel); }
-
-    section { padding: 80px 0; border-top: 1px solid var(--line); }
-    h2 { font-size: 1.9rem; letter-spacing: -0.02em; margin: 0 0 40px; }
-
-    .services { display: grid; gap: 0; }
-    .service {
-      display: grid; grid-template-columns: 1fr 2fr; gap: 24px;
-      padding: 28px 0; border-bottom: 1px solid var(--line);
-    }
-    .service:first-child { padding-top: 0; }
-    .service h3 { margin: 0; font-size: 1.15rem; }
-    .service p { margin: 0; color: var(--muted); }
-
-    .about { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
-    .about p { margin: 0 0 16px; color: var(--muted); }
-    .facts { background: var(--panel); border-radius: 12px; padding: 28px; margin: 0; }
-    .facts div { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); }
-    .facts div:last-child { border-bottom: 0; }
-    .facts dt { color: var(--muted); }
-    .facts dd { margin: 0; font-weight: 700; text-align: right; }
-
-    .contact p { color: var(--muted); max-width: 52ch; margin: 0 0 28px; }
-    .mail { font-size: clamp(1.3rem, 4vw, 2rem); font-weight: 800; color: var(--accent); text-decoration: none; word-break: break-all; }
-    .mail:hover { text-decoration: underline; }
-
-    footer { border-top: 1px solid var(--line); padding: 32px 0; color: var(--muted); font-size: 0.9rem; }
-
-    @media (max-width: 720px) {
-      nav { gap: 16px; }
-      .hero { padding: 64px 0 56px; }
-      section { padding: 56px 0; }
-      .service, .about { grid-template-columns: 1fr; gap: 12px; }
-      .about { gap: 32px; }
-    }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    body { margin:0; font-family: system-ui, sans-serif; background:var(--bg); color:var(--text); line-height:1.65; }
+    .wrap { max-width:780px; margin:0 auto; padding:32px 20px 64px; }
+    h1 { font-size:2rem; margin:0 0 8px; line-height:1.2; }
+    h2 { font-size:1.4rem; margin:40px 0 12px; }
+    .lead { color:var(--muted); margin:0 0 24px; }
+    .box { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:20px; margin-bottom:16px; }
+    .box h3 { margin:0 0 8px; font-size:1.1rem; }
+    .box p, .box li { color:var(--muted); margin:6px 0; }
+    .box ol, .box ul { padding-left:20px; margin:8px 0; }
+    .warn { border-color:#c9a13a; }
+    input { width:100%; padding:14px; font-size:1rem; border-radius:8px; border:1px solid var(--line); background:var(--panel); color:var(--text); margin-bottom:14px; }
+    .chips { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+    .chip { padding:8px 14px; border:1px solid var(--line); background:none; color:var(--muted); border-radius:20px; font-size:0.9rem; }
+    .chip.on { border-color:var(--accent); color:var(--accent); }
+    #sayi { color:var(--muted); font-size:0.9rem; margin-bottom:16px; }
+    .tool h3 { margin:0; font-size:1.2rem; }
+    .tag { color:var(--accent); font-size:0.85rem; }
+    pre { margin:8px 0 0; padding:12px; background:var(--bg); border-radius:6px; overflow-x:auto; font-size:0.88rem; }
+    .lbl { color:var(--muted); font-size:0.8rem; margin-top:10px; }
+    button.kopya { margin-top:10px; padding:8px 14px; border:1px solid var(--accent); background:none; color:var(--accent); border-radius:6px; font-size:0.9rem; }
+    footer { color:var(--muted); font-size:0.85rem; margin-top:32px; }
   </style>
 </head>
 <body>
-  <header>
-    <div class="wrap bar">
-      <a class="brand" href="#top">Adınız Soyadınız</a>
-      <nav aria-label="Ana menü">
-        <a href="#hizmetler">Hizmetler</a>
-        <a href="#hakkimda">Hakkımda</a>
-        <a href="#iletisim">İletişim</a>
-      </nav>
+  <div class="wrap">
+    <h1>Termux ve OSINT Araçları Rehberi</h1>
+    <p class="lead">OSINT'in ne olduğunu öğrenin, ardından Termux'ta kullanılan 55 aracı inceleyin.</p>
+
+    <h2>OSINT nedir?</h2>
+    <div class="box">
+      <p>OSINT (Open Source Intelligence), herkese açık kaynaklardan yasal yolla bilgi toplayıp analiz etme yöntemidir. Kaynaklar arasında web siteleri, sosyal medya, haberler, kamu kayıtları, alan adı kayıtları ve görsellerin içindeki metadata bulunur.</p>
     </div>
-  </header>
-
-  <main id="top">
-    <div class="wrap hero">
-      <h1>İşinizi büyüten sade ve hızlı web siteleri.</h1>
-      <p>Küçük işletmeler ve bireysel profesyoneller için tasarım, geliştirme ve yayına alma. İlk görüşme ücretsiz.</p>
-      <div class="btns">
-        <a class="btn primary" href="#iletisim">Teklif isteyin</a>
-        <a class="btn ghost" href="#hizmetler">Hizmetleri görün</a>
-      </div>
+    <div class="box">
+      <h3>Ne için kullanılır?</h3>
+      <ul>
+        <li>Siber güvenlik: bir kurumun internete açık bilgilerini ve saldırı yüzeyini görmek</li>
+        <li>Gazetecilik: haber, görsel ve iddiaların doğruluğunu kontrol etmek</li>
+        <li>Dolandırıcılık ve sahte site tespiti</li>
+        <li>Dijital ayak izi kontrolü: kendi bilgilerinizin internette ne kadar göründüğünü öğrenmek</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>Nasıl kullanılır?</h3>
+      <ol>
+        <li>Cevaplamak istediğiniz soruyu net yazın.</li>
+        <li>Kaynakları ve araçları seçin, bulduklarınızı kaydedin.</li>
+        <li>Bilgiyi en az iki bağımsız kaynakla doğrulayın.</li>
+        <li>Sonuçları düzenleyin ve raporlayın.</li>
+      </ol>
+    </div>
+    <div class="box warn">
+      <h3>Yasal ve etik sınırlar</h3>
+      <ul>
+        <li>Yalnızca herkese açık bilgileri toplayın. Şifre kırma, izinsiz erişim ve hesaba girme OSINT değildir.</li>
+        <li>Başkalarının kişisel verilerini toplamak ve saklamak KVKK gibi yasalara takılabilir.</li>
+        <li>Tarama ve keşif araçlarını yalnızca kendi sistemlerinizde ya da yazılı izin aldığınız hedeflerde kullanın.</li>
+        <li>Kişileri rahatsız etmek, takip etmek veya ifşa etmek için kullanmayın.</li>
+      </ul>
     </div>
 
-    <section id="hizmetler">
-      <div class="wrap">
-        <h2>Hizmetler</h2>
-        <div class="services">
-          <div class="service">
-            <h3>Kurumsal web sitesi</h3>
-            <p>Markanızı anlatan, telefonda ve bilgisayarda düzgün açılan, arama motorlarına uygun sayfalar.</p>
-          </div>
-          <div class="service">
-            <h3>Tanıtım sayfası</h3>
-            <p>Tek sayfada ürün ya da hizmetinizi anlatan, ziyaretçiyi iletişime yönlendiren sayfa.</p>
-          </div>
-          <div class="service">
-            <h3>Bakım ve güncelleme</h3>
-            <p>Yayındaki sitenizin içerik, hız ve güvenlik takibi. Aylık sabit ücretle.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <h2>Araçlar</h2>
+    <input id="ara" type="search" placeholder="Araç ara...">
+    <div class="chips" id="chips"></div>
+    <div id="sayi"></div>
+    <div id="liste"></div>
 
-    <section id="hakkimda">
-      <div class="wrap about">
-        <div>
-          <h2>Hakkımda</h2>
-          <p>Buraya kendinizi iki üç cümleyle tanıtın: ne iş yaptığınızı, kaç yıldır yaptığınızı ve müşterilerinizin sizinle çalışırken ne kazandığını yazın.</p>
-          <p>Somut olun. "Kaliteli hizmet" yerine "48 saatte ilk taslak" gibi ölçülebilir bir söz daha güven verir.</p>
-        </div>
-        <dl class="facts">
-          <div><dt>Deneyim</dt><dd>8 yıl</dd></div>
-          <div><dt>Tamamlanan proje</dt><dd>60+</dd></div>
-          <div><dt>Ortalama teslim süresi</dt><dd>2 hafta</dd></div>
-          <div><dt>Çalışma şekli</dt><dd>Uzaktan</dd></div>
-        </dl>
-      </div>
-    </section>
+    <footer>
+      Kurulum komutları Termux ve araç sürümüne göre değişebilir. Kurulum hatasında aracın GitHub sayfasındaki README'ye bakın. "API anahtarı" gerektiren araçlarda ilgili sitede ücretsiz hesap açmanız gerekir.
+    </footer>
+  </div>
 
-    <section id="iletisim" class="contact">
-      <div class="wrap">
-        <h2>İletişim</h2>
-        <p>Projenizi kısaca anlatan bir e-posta yeterli. Bir iş günü içinde dönüş yaparım.</p>
-        <a class="mail" href="mailto:ornek@eposta.com">ornek@eposta.com</a>
-      </div>
-    </section>
-  </main>
+  <script>
+    // [ad, kategori, açıklama, kurulum, kullanım]
+    const T = [
+      ["Sherlock","Kullanıcı ve e-posta","Bir kullanıcı adının hangi sosyal medya ve sitelerde kayıtlı olduğunu arar.","pip install sherlock-project","sherlock kullaniciadi"],
+      ["Maigret","Kullanıcı ve e-posta","Sherlock'a benzer, binlerce siteyi tarar ve bulduğu profillerden özet rapor çıkarır.","pip install maigret","maigret kullaniciadi"],
+      ["Socialscan","Kullanıcı ve e-posta","Bir kullanıcı adı ya da e-postanın sitelerde kullanılıp kullanılmadığını hızlıca kontrol eder.","pip install socialscan","socialscan kullaniciadi"],
+      ["WhatsMyName (web)","Kullanıcı ve e-posta","Kullanıcı adı aramasını tarayıcıdan yapan, sürekli güncellenen bir site listesi.","Kurulum gerekmez","Tarayıcıda whatsmyname.app adresini açın"],
+      ["Holehe","Kullanıcı ve e-posta","Bir e-posta adresinin hangi sitelerde hesabı olduğunu kontrol eder. Kendi adreslerinizi kontrol etmek için kullanışlıdır.","pip install holehe","holehe ornek@mail.com"],
+      ["GHunt","Kullanıcı ve e-posta","Bir Google hesabının herkese açık bilgilerini gösterir. İlk kullanımda giriş ayarı gerekir.","pip install ghunt","ghunt login\nghunt email ornek@gmail.com"],
+      ["Instaloader","Kullanıcı ve e-posta","Herkese açık Instagram profillerinin bilgilerini indirir.","pip install instaloader","instaloader --no-pictures --no-videos profiladi"],
+      ["yt-dlp","Kullanıcı ve e-posta","Video sitelerinden videoyu ve tüm metadata bilgisini (yükleme tarihi, açıklama, kanal) çıkarır.","pip install yt-dlp","yt-dlp --dump-json https://video-adresi"],
+      ["Have I Been Pwned (web)","Kullanıcı ve e-posta","E-postanızın veri sızıntılarında geçip geçmediğini gösterir. Kendi adreslerinizi kontrol edin.","Kurulum gerekmez","Tarayıcıda haveibeenpwned.com adresini açın"],
+      ["Ters görsel arama (web)","Kullanıcı ve e-posta","Bir görselin başka nerede yayınlandığını bulur. Sahte profil ve sahte haber tespitinde işe yarar.","Kurulum gerekmez","Google Lens, TinEye veya Yandex Görseller'e görseli yükleyin"],
+      ["Google Dorks","Kullanıcı ve e-posta","Arama motorunun özel operatörleriyle belirli sitede ya da belirli dosya türünde arama yapma tekniğidir.","Kurulum gerekmez","site:ornek.com filetype:pdf"],
 
-  <footer>
-    <div class="wrap">© 2026 Adınız Soyadınız. Tüm hakları saklıdır.</div>
-  </footer>
+      ["whois","Alan adı ve DNS","Bir alan adının kayıt tarihi, kayıt şirketi ve sona erme tarihi gibi bilgilerini gösterir.","pkg install whois","whois ornek.com"],
+      ["dig","Alan adı ve DNS","Alan adının DNS kayıtlarını (A, MX, TXT, NS) sorgular.","pkg install dnsutils","dig ornek.com MX"],
+      ["nslookup","Alan adı ve DNS","Bir alan adının IP adresini bulan basit DNS sorgu aracı.","pkg install dnsutils","nslookup ornek.com"],
+      ["host","Alan adı ve DNS","DNS sorgularının kısa ve okunaklı çıktısını verir.","pkg install dnsutils","host ornek.com"],
+      ["dnsrecon","Alan adı ve DNS","Bir alan adının DNS kayıtlarını toplu şekilde tarar ve listeler.","pip install dnsrecon","dnsrecon -d ornek.com"],
+      ["Sublist3r","Alan adı ve DNS","Arama motorları ve açık kaynaklardan bir alan adının alt alan adlarını bulur.","git clone https://github.com/aboul3la/Sublist3r\ncd Sublist3r\npip install -r requirements.txt","python sublist3r.py -d ornek.com"],
+      ["Subfinder","Alan adı ve DNS","Herkese açık kaynaklardan alt alan adlarını hızla listeler.","pkg install golang\ngo install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest","subfinder -d ornek.com"],
+      ["Amass","Alan adı ve DNS","OWASP projesi. Bir kurumun alt alan adlarını ve dış varlıklarını haritalar.","pkg install golang\ngo install -v github.com/owasp-amass/amass/v4/...@master","amass enum -d ornek.com"],
+      ["crt.sh","Alan adı ve DNS","Sertifika şeffaflık kayıtlarından alan adına ait tüm sertifikaları ve alt alan adlarını gösterir.","pkg install curl","curl 'https://crt.sh/?q=%25.ornek.com&output=json'"],
+      ["theHarvester","Alan adı ve DNS","Bir alan adına bağlı e-posta, alt alan adı ve IP bilgilerini herkese açık kaynaklardan toplar.","git clone https://github.com/laramies/theHarvester\ncd theHarvester\npip install -r requirements/base.txt","python theHarvester.py -d ornek.com -b duckduckgo"],
+      ["Wayback Machine API","Alan adı ve DNS","Bir sitenin internet arşivindeki eski kopyalarını bulur. Silinmiş sayfaları görmek için kullanılır.","pkg install curl","curl 'https://archive.org/wayback/available?url=ornek.com'"],
+      ["waybackurls","Alan adı ve DNS","Bir alan adının arşivde kayıtlı tüm eski adreslerini listeler.","pkg install golang\ngo install github.com/tomnomnom/waybackurls@latest","echo ornek.com | waybackurls"],
+      ["gau","Alan adı ve DNS","Arşiv sitelerinden bir alan adının bilinen adreslerini toplar.","pkg install golang\ngo install github.com/lc/gau/v2/cmd/gau@latest","gau ornek.com"],
+
+      ["curl","Web keşfi","Web sayfası ve API'lere istek atar. Sunucunun cevap başlıklarını görmek için kullanılır.","pkg install curl","curl -I https://ornek.com"],
+      ["jq","Web keşfi","JSON verisini okunaklı hale getirir ve içinden istediğiniz alanı seçer.","pkg install jq","curl -s https://ipinfo.io/8.8.8.8 | jq ."],
+      ["httpx","Web keşfi","Alan adı listesinin hangilerinin açık olduğunu, başlığını ve kullandığı teknolojiyi gösterir.","pkg install golang\ngo install github.com/projectdiscovery/httpx/cmd/httpx@latest","echo ornek.com | httpx -title -tech-detect"],
+      ["WhatWeb","Web keşfi","Bir web sitesinin hangi teknolojilerle (CMS, sunucu, kütüphane) yapıldığını tespit eder.","pkg install ruby git\ngit clone https://github.com/urbanadventurer/WhatWeb","cd WhatWeb\n./whatweb ornek.com"],
+      ["Photon","Web keşfi","Bir siteyi gezip içindeki bağlantıları, e-postaları ve dosyaları çıkarır.","git clone https://github.com/s0md3v/Photon\ncd Photon\npip install -r requirements.txt","python photon.py -u https://ornek.com"],
+      ["Recon-ng","Web keşfi","Modüllerle çalışan, Metasploit benzeri komut satırı OSINT çerçevesi.","git clone https://github.com/lanmaster53/recon-ng\ncd recon-ng\npip install -r REQUIREMENTS","./recon-ng"],
+      ["SpiderFoot","Web keşfi","Onlarca kaynağı otomatik tarayıp sonuçları tarayıcıda gösteren OSINT platformu.","git clone https://github.com/smicallef/spiderfoot\ncd spiderfoot\npip install -r requirements.txt","python sf.py -l 127.0.0.1:5001\n(sonra tarayıcıda 127.0.0.1:5001 açın)"],
+      ["Shodan CLI","Web keşfi","İnternete bağlı cihaz ve servislerin arama motoru. API anahtarı gerekir.","pip install shodan","shodan init API_ANAHTARINIZ\nshodan host 8.8.8.8"],
+      ["ipinfo","Web keşfi","Bir IP adresinin ülke, şehir ve servis sağlayıcı bilgisini verir.","pkg install curl","curl ipinfo.io/8.8.8.8"],
+      ["ip-api","Web keşfi","IP adresi konum ve sağlayıcı bilgisini JSON olarak verir.","pkg install curl","curl http://ip-api.com/json/8.8.8.8"],
+      ["urlscan.io (web)","Web keşfi","Şüpheli bir bağlantıyı açmadan taratıp ekran görüntüsü ve istek listesini gösterir.","Kurulum gerekmez","Tarayıcıda urlscan.io adresini açın"],
+      ["VirusTotal (web)","Web keşfi","Dosya, alan adı ve bağlantıyı onlarca güvenlik motoruyla kontrol eder.","Kurulum gerekmez","Tarayıcıda virustotal.com adresini açın"],
+      ["openssl s_client","Web keşfi","Bir sitenin SSL sertifikasını (veren, geçerlilik tarihi) gösterir.","pkg install openssl-tool","openssl s_client -connect ornek.com:443 -servername ornek.com"],
+      ["wget","Web keşfi","Dosya indirir. --spider ile sayfayı indirmeden sunucu cevabını kontrol eder.","pkg install wget","wget -S --spider https://ornek.com"],
+
+      ["ExifTool","Dosya ve medya","Fotoğraf ve belgelerin içindeki metadata bilgilerini (cihaz, tarih, bazen konum) okur.","pkg install exiftool","exiftool foto.jpg"],
+      ["ImageMagick","Dosya ve medya","Görsel dosyalarının teknik bilgisini gösterir ve görselleri düzenler.","pkg install imagemagick","identify -verbose foto.jpg"],
+      ["ffprobe (FFmpeg)","Dosya ve medya","Video ve ses dosyalarının süre, çözünürlük ve oluşturma bilgisini gösterir.","pkg install ffmpeg","ffprobe video.mp4"],
+      ["Tesseract","Dosya ve medya","Görseldeki yazıyı metne çevirir (OCR). Ekran görüntülerinden metin çıkarmak için kullanılır.","pkg install tesseract","tesseract resim.png cikti"],
+
+      ["ping","Ağ","Bir adrese ulaşılıp ulaşılamadığını ve gecikme süresini ölçer.","pkg install iputils","ping -c 4 ornek.com"],
+      ["traceroute","Ağ","Paketlerin hedefe giderken geçtiği ağ duraklarını gösterir.","pkg install traceroute","traceroute ornek.com"],
+      ["mtr","Ağ","Ping ve traceroute'u birleştirir. Hangi durakta gecikme ya da kayıp olduğunu gösterir.","pkg install mtr","mtr -r ornek.com"],
+      ["Nmap","Ağ","Bir ağdaki cihazları ve açık portları bulur. Yalnızca kendi ağınızda veya izinli sistemlerde kullanın.","pkg install nmap","nmap -sn 192.168.1.0/24"],
+      ["netcat","Ağ","Bir adresin belirli portuna bağlanıp portun açık olup olmadığını test eder.","pkg install netcat-openbsd","nc -zv ornek.com 443"],
+      ["fping","Ağ","Birçok adrese aynı anda ping atıp hangilerinin yanıt verdiğini listeler.","pkg install fping","fping -a -g 192.168.1.0/24"],
+      ["iperf3","Ağ","İki cihaz arasındaki ağ hızını ölçer.","pkg install iperf3","iperf3 -c sunucu-adresi"],
+      ["speedtest-cli","Ağ","İnternet indirme ve yükleme hızını komut satırından ölçer.","pip install speedtest-cli","speedtest-cli"],
+      ["ip (iproute2)","Ağ","Cihazın ağ arayüzlerini ve IP adreslerini gösterir. Android sürümüne göre kısıtlı çalışabilir.","pkg install iproute2","ip addr"],
+      ["net-tools","Ağ","ifconfig ve netstat gibi klasik ağ komutlarını sağlar.","pkg install net-tools","ifconfig"],
+
+      ["termux-api","Sistem","Termux'tan telefonun pil, konum ve sensör bilgilerine erişir. Ayrıca Termux:API uygulaması gerekir.","pkg install termux-api","termux-battery-status"],
+      ["neofetch","Sistem","Cihaz, işletim sistemi ve donanım bilgisini tek ekranda gösterir.","pkg install neofetch","neofetch"],
+      ["htop","Sistem","Çalışan işlemleri ve bellek kullanımını canlı olarak gösterir.","pkg install htop","htop"]
+    ];
+
+    const liste = document.getElementById("liste");
+    const chips = document.getElementById("chips");
+    const sayi = document.getElementById("sayi");
+    const ara = document.getElementById("ara");
+    const kategoriler = ["Hepsi", ...new Set(T.map(t => t[1]))];
+    let aktif = "Hepsi";
+
+    function kartYap(t) {
+      const [ad, kat, acik, kur, kullan] = t;
+      const kart = document.createElement("div");
+      kart.className = "box tool";
+
+      const h = document.createElement("h3");
+      h.textContent = ad;
+      const tag = document.createElement("div");
+      tag.className = "tag";
+      tag.textContent = kat;
+      const p = document.createElement("p");
+      p.textContent = acik;
+
+      const l1 = document.createElement("div");
+      l1.className = "lbl";
+      l1.textContent = "Kurulum";
+      const k1 = document.createElement("pre");
+      k1.textContent = kur;
+
+      const l2 = document.createElement("div");
+      l2.className = "lbl";
+      l2.textContent = "Kullanım";
+      const k2 = document.createElement("pre");
+      k2.textContent = kullan;
+
+      const b = document.createElement("button");
+      b.className = "kopya";
+      b.textContent = "Kurulumu kopyala";
+      b.onclick = () => {
+        navigator.clipboard.writeText(kur);
+        b.textContent = "Kopyalandı";
+      };
+
+      kart.append(h, tag, p, l1, k1, l2, k2, b);
+      return kart;
+    }
+
+    function goster() {
+      const f = ara.value.toLowerCase();
+      const sonuc = T.filter(t =>
+        (aktif === "Hepsi" || t[1] === aktif) &&
+        (t[0] + t[1] + t[2]).toLowerCase().includes(f)
+      );
+      liste.replaceChildren(...sonuc.map(kartYap));
+      sayi.textContent = sonuc.length + " araç gösteriliyor";
+    }
+
+    kategoriler.forEach(k => {
+      const c = document.createElement("button");
+      c.className = "chip" + (k === aktif ? " on" : "");
+      c.textContent = k;
+      c.onclick = () => {
+        aktif = k;
+        chips.querySelectorAll(".chip").forEach(x => x.classList.toggle("on", x.textContent === k));
+        goster();
+      };
+      chips.append(c);
+    });
+
+    ara.addEventListener("input", goster);
+    goster();
+  </script>
 </body>
 </html>
