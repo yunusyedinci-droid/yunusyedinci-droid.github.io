@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Adınız Soyadınız | Web Tasarım ve Danışmanlık</title>
+  <meta name="description" content="Kısa ve net bir site açıklaması yazın.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1b2a41;
+      --muted: #56657a;
+      --line: #dfe5ec;
+      --bg: #fafbfc;
+      --panel: #eef2f6;
+      --accent: #0f6e8c;
+      --accent-dark: #0b566f;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.65;
+    }
+    a { color: inherit; }
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+
+    header { border-bottom: 1px solid var(--line); background: #fff; position: sticky; top: 0; z-index: 10; }
+    .bar { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+    .brand { font-weight: 800; text-decoration: none; letter-spacing: -0.01em; }
+    nav { display: flex; gap: 24px; }
+    nav a { text-decoration: none; color: var(--muted); font-weight: 500; font-size: 0.95rem; }
+    nav a:hover { color: var(--ink); }
+
+    .hero { padding: 96px 0 88px; }
+    .hero h1 {
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+      margin: 0 0 24px;
+      max-width: 16ch;
+    }
+    .hero p { font-size: 1.15rem; color: var(--muted); max-width: 52ch; margin: 0 0 36px; }
+    .btns { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      display: inline-block; padding: 14px 26px; border-radius: 8px;
+      font-weight: 700; text-decoration: none; border: 2px solid var(--accent);
+    }
+    .btn.primary { background: var(--accent); color: #fff; }
+    .btn.primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+    .btn.ghost { color: var(--accent); }
+    .btn.ghost:hover { background: var(--panel); }
+
+    section { padding: 80px 0; border-top: 1px solid var(--line); }
+    h2 { font-size: 1.9rem; letter-spacing: -0.02em; margin: 0 0 40px; }
+
+    .services { display: grid; gap: 0; }
+    .service {
+      display: grid; grid-template-columns: 1fr 2fr; gap: 24px;
+      padding: 28px 0; border-bottom: 1px solid var(--line);
+    }
+    .service:first-child { padding-top: 0; }
+    .service h3 { margin: 0; font-size: 1.15rem; }
+    .service p { margin: 0; color: var(--muted); }
+
+    .about { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .about p { margin: 0 0 16px; color: var(--muted); }
+    .facts { background: var(--panel); border-radius: 12px; padding: 28px; margin: 0; }
+    .facts div { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+    .facts div:last-child { border-bottom: 0; }
+    .facts dt { color: var(--muted); }
+    .facts dd { margin: 0; font-weight: 700; text-align: right; }
+
+    .contact p { color: var(--muted); max-width: 52ch; margin: 0 0 28px; }
+    .mail { font-size: clamp(1.3rem, 4vw, 2rem); font-weight: 800; color: var(--accent); text-decoration: none; word-break: break-all; }
+    .mail:hover { text-decoration: underline; }
+
+    footer { border-top: 1px solid var(--line); padding: 32px 0; color: var(--muted); font-size: 0.9rem; }
+
+    @media (max-width: 720px) {
+      nav { gap: 16px; }
+      .hero { padding: 64px 0 56px; }
+      section { padding: 56px 0; }
+      .service, .about { grid-template-columns: 1fr; gap: 12px; }
+      .about { gap: 32px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap bar">
+      <a class="brand" href="#top">Adınız Soyadınız</a>
+      <nav aria-label="Ana menü">
+        <a href="#hizmetler">Hizmetler</a>
+        <a href="#hakkimda">Hakkımda</a>
+        <a href="#iletisim">İletişim</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="wrap hero">
+      <h1>İşinizi büyüten sade ve hızlı web siteleri.</h1>
+      <p>Küçük işletmeler ve bireysel profesyoneller için tasarım, geliştirme ve yayına alma. İlk görüşme ücretsiz.</p>
+      <div class="btns">
+        <a class="btn primary" href="#iletisim">Teklif isteyin</a>
+        <a class="btn ghost" href="#hizmetler">Hizmetleri görün</a>
+      </div>
+    </div>
+
+    <section id="hizmetler">
+      <div class="wrap">
+        <h2>Hizmetler</h2>
+        <div class="services">
+          <div class="service">
+            <h3>Kurumsal web sitesi</h3>
+            <p>Markanızı anlatan, telefonda ve bilgisayarda düzgün açılan, arama motorlarına uygun sayfalar.</p>
+          </div>
+          <div class="service">
+            <h3>Tanıtım sayfası</h3>
+            <p>Tek sayfada ürün ya da hizmetinizi anlatan, ziyaretçiyi iletişime yönlendiren sayfa.</p>
+          </div>
+          <div class="service">
+            <h3>Bakım ve güncelleme</h3>
+            <p>Yayındaki sitenizin içerik, hız ve güvenlik takibi. Aylık sabit ücretle.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="hakkimda">
+      <div class="wrap about">
+        <div>
+          <h2>Hakkımda</h2>
+          <p>Buraya kendinizi iki üç cümleyle tanıtın: ne iş yaptığınızı, kaç yıldır yaptığınızı ve müşterilerinizin sizinle çalışırken ne kazandığını yazın.</p>
+          <p>Somut olun. "Kaliteli hizmet" yerine "48 saatte ilk taslak" gibi ölçülebilir bir söz daha güven verir.</p>
+        </div>
+        <dl class="facts">
+          <div><dt>Deneyim</dt><dd>8 yıl</dd></div>
+          <div><dt>Tamamlanan proje</dt><dd>60+</dd></div>
+          <div><dt>Ortalama teslim süresi</dt><dd>2 hafta</dd></div>
+          <div><dt>Çalışma şekli</dt><dd>Uzaktan</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section id="iletisim" class="contact">
+      <div class="wrap">
+        <h2>İletişim</h2>
+        <p>Projenizi kısaca anlatan bir e-posta yeterli. Bir iş günü içinde dönüş yaparım.</p>
+        <a class="mail" href="mailto:ornek@eposta.com">ornek@eposta.com</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">© 2026 Adınız Soyadınız. Tüm hakları saklıdır.</div>
+  </footer>
+</body>
+</html>
